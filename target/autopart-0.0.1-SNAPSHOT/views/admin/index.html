@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+		
+			<h2>Управление сайтом</h2>	
+		
+			<div class="row admin-mosaic">
+			
+				<div class="col-md-3">
+					<a class="btn btn-default btn-block text-center" href="/admin/users">
+						<i class="fa fa-users"></i>
+						<br/>
+						Пользователи
+					</a>
+				</div>
+
+				<div class="col-md-3">
+					<a class="btn btn-default btn-block text-center" href="#">
+						<i class="fa fa-shopping-cart"></i>
+						<br/>
+						Заказы
+					</a>
+				</div>
+				
+				<div class="col-md-3">
+					<a class="btn btn-default btn-block text-center" href="/admin/requests">
+						<i class="fa fa-comment-o"></i>
+						<br/>
+						Запросы
+					</a>
+				</div>		
+				
+				<div class="col-md-3">
+					<a class="btn btn-default btn-block text-center" href="">
+						<i class="fa fa-search"></i>
+						<br/>
+						Статистика поиска
+					</a>
+				</div>						
+			
+			</div>
+			
+		</div>
+	</body>
+</html>

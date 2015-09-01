@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+		
+			<script type="text/javascript" src="/js/bootstrap-datepicker.js"></script>
+			<script type="text/javascript" src="/js/bootstrap-datepicker.ru.js"></script>
+			<script type="text/javascript" src="/js/admin/queries.js"></script>
+		
+			<h2>Статистика поиска c <span th:text="${from}"></span> по <span th:text="${to}"></span></h2>
+
+			<hr/>
+			
+			<div class="row">
+				<form method="get">
+					<div class="col-md-10">
+						<div class="input-daterange input-group" id="datepicker">
+							<input type="text" class="form-control" name="from" th:value="${from}" />
+							<span class="input-group-addon"> - </span>
+							<input type="text" class="form-control" name="to" th:value="${to}" />
+						</div>				
+					</div>
+					<div class="col-md-2">
+						<button class="btn btn-primary btn-block btn-input-same-height">
+							<i class="fa fa-filter"></i>
+							Фильтровать
+						</button>
+					</div>
+				</form>
+			</div>
+			
+		
+			<hr/>
+			<table class="table table-hover queries-table">
+				<thead>
+					<tr>
+						<th>Запрос</th>
+						<th>Количество</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="query : ${queries}">
+						<td th:text="${query.key}"></td>
+						<td th:text="${query.value}" class="count"></td>
+					</tr>
+				</tbody>
+			</table>
+			<hr/>
+			
+			<div th:replace="fragments/paginator :: paginator (paginator = ${paginator})"></div>
+
+			<hr/>
+		</div>
+	</body>
+</html>

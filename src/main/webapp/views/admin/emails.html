@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+			
+			<div class="row">
+            	<div class="col-md-12">
+                    <ol class="breadcrumb">
+                    	<li><a href="/admin">Управление</a></li>
+                        <li class="active">Шаблоны писем</li>
+                    </ol>
+                    <hr/>
+            	</div>
+            </div>
+		
+			<h2>Шаблоны писем</h2>
+			
+			<table class="table table-bordered table-hover admin-emails-table">
+				<thead>
+					<tr>
+						<th>Мнемо</th>
+						<th>Тема</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="template : ${templates}">
+						<td th:text="${template.mnemo}"></td>
+						<td th:text="${template.subject}"></td>
+						<td class="edit">
+							<a th:href="${'/admin/email/' + template.id}" class="btn btn-primary btn-sm">Редактировать</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+	</body>
+</html>

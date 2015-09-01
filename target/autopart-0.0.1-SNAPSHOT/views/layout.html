@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Автопарт - новые запчасти</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="author" content="" />
+
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="format-detection" content="telephone=no" />
+
+<link href="/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
+<link href="/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/css/custom.css" rel="stylesheet" type="text/css" />
+<link href="/css/color.css" rel="stylesheet" type="text/css" />
+
+<script src="/js/jquery-2.0.0.min.js"></script>
+<script src="/js/ui-plugins.js"></script>
+<script src="/js/helper-plugins.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/init.js"></script>
+<script src="/js/bootbox.min.js"></script>
+<script src="/js/bootstrap-waitingfor.js"></script>
+
+<script src="/js/jquery.storageapi.js"></script>
+<script src="/js/mustache.js"></script>
+<script src="/js/jquery.mustache.js"></script>
+
+</head>
+<body class="home boxed">
+
+<div class="body">
+	<!-- Start Site Header -->
+	<div class="site-header-wrapper">
+        <header class="site-header">
+            <div class="container sp-cont">
+                <div class="site-logo">
+                    <h1><a href="/"><img src="/images/logo.png" alt="Logo" /></a></h1>
+                    <span id="logo-text-1">втопарт</span>
+                    <span id="logo-text-2">запчасти новые и б/у</span>
+                    <span id="logo-text-3">в наличии и под заказ</span>
+                </div>
+                <div class="header-right">
+                
+                    <div class="topnav dd-menu" th:switch="${#authentication.name}">
+                    
+                        <ul class="top-navigation" th:case="'anonymousUser'">
+                        	<li><a href="/cart"><i class="fa fa-shopping-cart"></i> Корзина (3)</a></li>
+                            <li><a href="/login"><i class="fa fa-key"></i> Вход</a></li>
+                            <li><a href="/registration"><i class="fa fa-user-plus"></i> Регистрация</a></li>
+                        </ul>
+                        
+						<ul class="top-navigation" th:case="*">
+                    		<li><a href="/profile"><i class="fa fa-user"></i> <span th:text="${#authentication.name}"></span></a></li>
+                    		<li sec:authorize="hasRole('ROLE_USER')"><a href="/admin"><i class="fa fa-wrench"></i> Управление</a></li>
+                        	<li><a href="/cart"><i class="fa fa-shopping-cart"></i> Корзина (3)</a></li>
+                            <li><a href="/security/logout"><i class="fa fa-user-times"></i> Выход</a></li>                    	
+                    	</ul>
+                        
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- End Site Header -->
+        <div class="navbar">
+            <div class="container sp-cont sp-cont-search">
+                <div class="search-function">
+                    <input type="text" placeholder="Введите поисковый запрос: номер запчасти, ее наименование, марку или модель автомобиля, производителя" />
+                    <a href="index.html#" class="search-trigger"><i class="fa fa-search"></i></a>
+                </div>
+            </div>
+        </div>
+   	</div>
+  	<div class="main" role="main">
+    	<div id="content" class="content full padding-b0">
+            <div class="container" layout:fragment="content">
+            	<h1>Content will be here</h1>
+           	</div>
+        </div>
+   	</div>
+    <footer class="site-footer">
+        <div class="site-footer-bottom">
+        	<div class="container">
+                <div class="row">
+                	<div class="col-md-6 col-sm-6 copyrights-left">
+                    	<p>&copy; 2015 Автопарт. Все права защищены</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End site footer -->
+  	<a id="back-to-top"><i class="fa fa-angle-double-up"></i></a>  
+</div>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4>Вход</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" class="form-control" placeholder="E-mail" />
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                        <input type="password" class="form-control" placeholder="Пароль" />
+                    </div>
+                    <div class="text-center">
+                    	<input type="submit" class="btn btn-primary" value="Войти" />
+                    </div>
+                </form>
+           	</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

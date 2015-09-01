@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+			<div class="row">
+				<div class="col-md-6">
+					<h2><i class="fa fa-bars"></i> Каталог автозапчастей</h2>
+				</div>
+				<div class="col-md-6 text-right header-counts">
+					<small>
+						<span th:text="${@utilsService.getDeclension(categories.size(), 'раздел', 'раздела', 'разделов')}"></span>,
+						<span th:text="${@utilsService.getDeclension(productsTotalCount, 'товар', 'товара', 'товаров')}"></span>
+					</small>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2 text-center catalog-item" th:each="category : ${categories}">
+					<div class="wrapper format-link links">
+						<a th:href="${category.link}" class="media-box">
+							<img th:src="${@utilsService.getImageUrl(category, 'c151x112')}" />
+							<h4 th:text="${category.name}"></h4>
+							<small th:text="${@utilsService.getDeclension(category.childsCount, 'подраздел', 'подраздела', 'подразделов')}"></small>
+							<br/>
+							<small th:text="${@utilsService.getDeclension(category.productsTotalCount, 'товар', 'товара', 'товаров')}"></small>
+						</a>
+					</div>
+				</div>
+			</div>
+			<hr/>
+			<h2><i class="fa fa-question-circle"></i> О компании</h2>
+			<div class="row about-company">
+				<div class="col-md-4 text-justify">
+					<p>
+						Уникальная система бесплатного подбора запчастей экспертами. Введите данные автомобиля и получите наиболее выгодные варианты как оригинальных, так и неоригинальных автозапчастей для иномарок! Не нужно разбираться в нюансах подбора и каталогах. Все просто!
+					</p>
+					<div class="text-center">
+						<div class="alert alert-info">
+							Если поиск по каталогу не дал результатов, оформите заявку и наши специалисты займутся поиском запчастей персонально для Вас
+						</div>
+						<a class="btn btn-primary btn-lg" href="/request">Оформить заявку на запчасти</a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<dl>
+						<dt><i class="fa fa-map-marker"></i> Адрес</dt>
+						<dd>город Новокузнецк, проспект Орджоникидзе, дом 11 (Полиграфкомбинат), офис 304/2, 3 этаж</dd>
+					</dl>
+					<dl>
+						<dt><i class="fa fa-phone"></i> Телефон</dt>
+						<dd>8 (3843) 601-966;  8-923-464-1966</dd>
+					</dl>
+					<dl>
+						<dt><i class="fa fa-envelope-o"></i> E-mail</dt>
+						<dd>admin@autopart-nk.ru</dd>
+					</dl>
+					<dl>
+						<dt><i class="fa fa-clock-o"></i> График работы</dt>
+						<dd>Пн-пт : с 9.00 до 19.00</dd>
+						<dd>Сб : с 11.00 до 17.00</dd>
+						<dd>Вс : выходной</dd>
+					</dl>
+				</div>
+				<div class="col-md-4">
+					<script type="text/javascript" charset="utf-8" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=52j3vWD7KTag3dxyLFBskRsAEuMsP0Lq&amp;width=335&amp;height=301"></script>
+				</div>
+			</div>
+			<div class="spacer-40"></div>
+		</div>
+	</body>
+</html>

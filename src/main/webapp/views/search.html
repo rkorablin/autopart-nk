@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+		
+			<script type="text/javascript" src="/js/jquery.query-object.js"></script>
+			<script type="text/javascript" src="/js/highlightRegex.js"></script>
+			<script type="text/javascript" src="/js/search.js"></script>
+		
+			<h2 class="h-search-result">Результаты поиска <small> по запросу "<span th:text="${query}"></span>"</small></h2>
+			<hr />
+			
+			<div class="alert alert-warning text-center" th:if="${not lengthAccepted}">
+				Поиск невозможен, минимальная длина поискового запроса <b th:text="${@utilsService.getDeclension(minLength, 'символ', 'символа', 'символов')}"></b>
+			</div>
+			
+			<div th:if="${lengthAccepted}">
+			
+			
+				<div th:if="${not #lists.isEmpty(byCode)}">
+					<h4>Поиск по артикулу</h4>
+					<table th:replace="fragments/productsTable :: productsTable (products = ${byCode})"></table>
+				</div>
+				
+				<div th:if="${not #lists.isEmpty(byCross)}">
+					<h4>Возможные замены</h4>
+					<table th:replace="fragments/productsTable :: productsTable (products = ${byCross})"></table>
+				</div>
+				
+				<div th:if="${not #lists.isEmpty(byText)}">
+					<h4>Поиск по тексту</h4>
+					<table th:replace="fragments/productsTable :: productsTable (products = ${byText})"></table>
+				</div>
+				
+				<div class="alert alert-warning text-center" th:if="${#lists.isEmpty(byCode) and #lists.isEmpty(byCross) and #lists.isEmpty(byText)}">
+					Поиск по запросу <span th:text="${query}"></span> не дал результатов. Попробуйте изменить запрос для поиска или оформите заявку и наши специалисты займутся поиском запчастей специально для Вас.
+				</div>
+				
+				<div class="alert alert-info text-center" th:if="${not (#lists.isEmpty(byCode) and #lists.isEmpty(byCross) and #lists.isEmpty(byText))}">
+					Если Вы не нашли необходимых Вам запчастей в нашем каталоге, Вы можете оформить заявку и наши специалисты займутся поиском запчастей специально для Вас.
+				</div>
+				
+				<div class="text-center">
+					<a class="btn btn-primary btn-lg" href="/request">Оформить заявку на запчасти</a>
+				</div>
+				
+				<div class="spacer-20"></div>
+				
+			</div>
+			
+		</div>
+	</body>
+</html>

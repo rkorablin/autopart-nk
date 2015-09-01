@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+<head>
+</head>
+<body>
+
+	<table th:fragment="productsTable (products)" class="table table-hover category-products-table">
+		<thead>
+			<tr>
+				<th>Наименование</th>
+				<th>Артикул</th>
+				<th class="th-quantity">Количество<br/>в наличии</th>
+				<th class="th-price">Цена</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="product : ${products}">
+				<td>
+					<i class="fa fa-cog"></i>
+					<a href="#" th:text="${product.name}"></a>
+					<br/>
+					<span th:text="${product.description}" class="small"></span>									
+					<br/>
+					<span th:text="${product.categoriesString}" class="small"></span>
+				</td>
+				<td th:text="${product.code}" class="td-code"></td>
+				<td class="td-quantity" th:text="${product.quantity}"></td>
+				<td class="td-price" th:text="${product.price}"></td>						
+				<td class="td-cart">
+					<a href="#" data-action="add-to-cart" th:attr="data-product-id=${product.id}">
+						<i class="fa fa-cart-plus"></i>
+						В корзину
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>	
+	
+</body>
+</html>

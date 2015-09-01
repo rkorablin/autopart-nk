@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+		
+			<div class="row">
+            	<div class="col-md-12">
+                    <ol class="breadcrumb">
+                    	<li><a href="/admin">Управление сайтом</a></li>
+                        <li><a href="/admin/requests">Запросы на запчасти</a></li>
+                        <li class="active" th:text="${'Запрос #' + request.id}"></li>
+                    </ol>
+                    <hr/>
+            	</div>
+            </div>
+		
+			<h2>Запрос #<span th:text="${request.id}"></span></h2>
+			
+			<dl class="dl-horizontal">
+  				<dt>Дата, время</dt>
+  				<dd th:text="${@utilsService.formatDateTime(request.date)}"></dd>
+  				<dt>Заказчик</dt>
+  				<dd>
+  					<a th:href="${'/admin/user/' + request.user.id}" th:text="${request.user.email}"></a>
+  				</dd>
+  				<dt>Статус</dt>
+  				<dd>
+  					<select>
+						<option th:each="status : ${@utilsService.getRequestStatusEnum().values()}" th:value="${status.name()}" th:text="${status}" th:selected="${status == request.status}"></option>
+  					</select>
+  				</dd>
+  				<!--dd>
+  					<span th:text="${request.status}"></span>
+  					<a href="#"><i class="fa fa-pencil-square-o"></i></a>
+  				</dd-->  				
+			</dl>
+			
+			<table class="table table-bordered table-hover request-table">
+				<thead>
+					<tr>
+						<th>Номер запчасти</th>
+						<th>Наименование запчасти</th>
+						<th>VIN-номер</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="item : ${items}">
+						<td th:text="${item.code}"></td>
+						<td th:text="${item.name}"></td>
+						<td th:text="${item.vin}"></td>
+						
+					</tr>
+				</tbody>
+			</table>
+			
+			<div class="form-group">
+				<label>Коментарий заказчика</label>
+				<textarea class="form-control" rows="5" th:text="${request.comment}" readonly="readonly"></textarea>
+			</div>
+			
+		</div>
+	</body>
+</html>

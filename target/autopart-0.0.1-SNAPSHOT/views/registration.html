@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+			<script src="/js/registration.js"></script>
+			<h1>Регистрация нового пользователя</h1>
+			<hr />
+			<form id="registration-form">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>E-mail</label>
+							<input class="form-control" type="text" placeholder="E-mail" name="email" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Пароль</label>
+							<input class="form-control" type="password" placeholder="Пароль" name="plainPassword" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Подтверждение пароля</label>
+							<input class="form-control" type="password" placeholder="Подтверждение пароля" name="plainPasswordConfirm" />
+						</div>
+					</div>					
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Фамилия</label>
+							<input class="form-control" type="text" placeholder="Фамилия" name="secondName" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Имя</label>
+							<input class="form-control" type="text" placeholder="Имя" name="firstName" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Отчество</label>
+							<input class="form-control" type="text" placeholder="Отчество" name="patronymicName" />
+						</div>
+					</div>					
+					
+					<div class="col-md-8 col-md-offset-2">
+						<div class="btn-group profile-type-selector" data-toggle="buttons">
+							<label class="btn btn-default active">
+								<input type="radio" name="type" value="PRIVATE_PERSON" autocomplete="off" checked="checked" />
+								<i class="fa fa-user"></i>
+								<span>
+									Я регистрируюсь как
+									<br/>
+									частное лицо
+								</span>
+							</label>
+							<label class="btn btn-default">
+						    	<input type="radio" name="type" value="ORGANIZATION_AGENT" autocomplete="off" />
+						    	<i class="fa fa-building-o"></i>
+								<span>
+									Я регистрируюсь как
+									<br/>
+									представитель юридического лица
+								</span>
+							</label>
+						</div>						
+					</div>
+
+					<div class="spacer-20"></div>
+
+					<div class="col-md-12" id="organization-name-block" style="display : none;">
+						<div class="form-group">
+							<label>Полное наименование юридического лица</label>
+							<input class="form-control" type="text" placeholder="Полное наименование юридического лица" name="organizationName" />
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Регион</label>
+							<input class="form-control" type="text" placeholder="Регион" name="address.region" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Город</label>
+							<input class="form-control" type="text" placeholder="Город" name="address.city" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Улица</label>
+							<input class="form-control" type="text" placeholder="Улица" name="address.street" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Дом</label>
+							<input class="form-control" type="text" placeholder="Дом" name="address.building" />
+						</div>
+					</div>					
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Квартира / офис</label>
+							<input class="form-control" type="text" placeholder="Квартира / офис" name="address.room" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Индекс</label>
+							<input class="form-control" type="text" placeholder="Индекс" name="address.zipcode" />
+						</div>
+					</div>
+
+				</div>
+			
+				<div class="form-group text-center">
+					<button class="btn btn-primary btn-lg" id="register-button">
+						<i class="fa fa-user-plus"></i> Зарегистрироваться
+					</button>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+		
+			<h2>Мои заказы</h2>
+			
+			<table class="table table-hover orders-table">
+				<thead>
+					<tr>
+						<th class="id">Номер</th>
+						<th class="date-time">Дата, время</th>
+						<th class="items">Позиции</th>
+						<th class="status">Статус</th>
+						<th class="details"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="order : ${orders}">
+						<td class="id">
+							<a th:href="${'/order/' + order.id}" th:text="${order.id}"></a>
+						</td>
+						<td class="date-time" th:text="${@utilsService.formatDateTime(order.date)}"></td>
+						<td class="items" th:text="${order.itemsCount}"></td>
+						<td class="status" th:text="${order.status}"></td>
+						<td class="details">
+							<a th:href="${'/order/' + order.id}"> <i class="fa fa-info-circle"></i> Подробнее</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+	</body>
+</html>

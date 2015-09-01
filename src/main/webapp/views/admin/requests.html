@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+		
+			<div class="row">
+            	<div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li><a href="/admin">Управление</a></li>
+                        <li class="active">Заявки на запчасти</li>
+                    </ol>
+                    <hr/>
+            	</div>
+            </div>
+		
+			<h2>Список заявок</h2>
+			
+			<table class="table table-hover orders-table">
+				<thead>
+					<tr>
+						<th class="id">Номер</th>
+						<th class="date-time">Дата, время</th>
+						<th class="user">Заказчик</th>
+						<th class="items">Позиции</th>
+						<th class="select-status">Статус</th>
+						<th class="details"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="request : ${requests}">
+						<td class="id">
+							<a th:href="${'/admin/request/' + request.id}" th:text="${request.id}"></a>
+						</td>
+						<td class="date-time" th:text="${@utilsService.formatDateTime(request.date)}"></td>
+						<td class="user">
+							<a th:href="${'/admin/user/' + request.user.id}" th:text="${request.user.fullName + ', ' + request.user.email}"></a>
+						</td>
+						<td class="items" th:text="${request.itemsCount}"></td>
+						<td class="select-status">
+							<select>
+								<option th:each="status : ${@utilsService.getRequestStatusEnum().values()}" th:value="${status.name()}" th:text="${status}" th:selected="${status == request.status}"></option>
+							</select>
+						</td>
+						<td class="details">
+							<a th:href="${'/admin/request/' + request.id}"> <i class="fa fa-info-circle"></i> Подробнее</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<hr/>
+			<div th:replace="fragments/paginator :: paginator (paginator = ${paginator})"></div>
+			<hr/>			
+		</div>
+	</body>
+</html>

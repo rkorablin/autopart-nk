@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+		
+			<h2>Статистика поиска</h2>
+
+			<hr/>
+			
+			<div class="row">
+				<div class="col-md-4">
+					<label>Начиная с даты</label>
+					<input type="date" class="form-control" />
+				</div>
+				<div class="col-md-4">
+					<label>Заканчивая датой</label>
+					<input type="date" class="form-control" />				
+				</div>
+				<div class="col-md-4">
+					<label> &nbsp; </label>
+					<div class="checkbox text-center">
+						<label>
+							<input type="checkbox" /> Не фильтровать по датам
+						</label>
+					</div>					
+				</div>
+			</div>
+			
+		
+			<hr/>
+			<table class="table table-hover users-table">
+				<thead>
+					<tr>
+						<th>Запрос</th>
+						<th>Количество</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="query : ${queries}">
+						<td th:text="${query.text}"></td>
+						<td th:text="${query.count}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<hr/>
+			<div class="text-center">
+				<nav>
+					<ul class="pagination">
+						<li>
+							<a href="#" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li>
+							<a href="#" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<hr/>
+		</div>
+	</body>
+</html>

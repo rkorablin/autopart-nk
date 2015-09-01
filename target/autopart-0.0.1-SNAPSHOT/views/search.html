@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+		
+			<h2 class="h-search-result">Результаты поиска <small> по запросу "JEF42398-SFK"</small></h2>
+			<hr />
+			
+			<h4>Поиск по артикулу</h4>
+			
+			<table class="table table-hover category-products-table">
+				<thead>
+					<tr>
+						<th>Наименование</th>
+						<th class="th-description">Коментарий</th>
+						<th class="th-vendor">Производитель</th>
+						<th class="th-code">Артикул</th>
+						<th class="th-quantity">Количество<br/>в наличии</th>
+						<th class="th-price">Цена</th>
+						<th class="th-cart"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="product : ${codeResults}">
+						<td>
+							<i class="fa fa-cog"></i> <a href="#" th:text="${product.name}"></a>
+						</td>
+						<td th:text="${product.description}"></td>
+						<td th:text="${product.vendor}"></td>
+						<td th:text="${product.code}"></td>
+						<td class="td-quantity" th:text="${product.quantity}"></td>
+						<td class="td-price" th:text="${product.price}"></td>						
+						<td class="td-cart">
+							<a href="#"> <i class="fa fa-cart-plus"></i> В корзину</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<h4>Поиск замены</h4>
+			
+			<table class="table table-hover category-products-table">
+				<thead>
+					<tr>
+						<th>Наименование</th>
+						<th class="th-description">Коментарий</th>
+						<th class="th-vendor">Производитель</th>
+						<th class="th-code">Артикул</th>
+						<th class="th-quantity">Количество<br/>в наличии</th>
+						<th class="th-price">Цена</th>
+						<th class="th-cart"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="product : ${crossResults}">
+						<td>
+							<i class="fa fa-cog"></i> <a href="#" th:text="${product.name}"></a>
+						</td>
+						<td th:text="${product.description}"></td>
+						<td th:text="${product.vendor}"></td>
+						<td th:text="${product.code}"></td>
+						<td class="td-quantity" th:text="${product.quantity}"></td>
+						<td class="td-price" th:text="${product.price}"></td>						
+						<td class="td-cart">
+							<a href="#"> <i class="fa fa-cart-plus"></i> В корзину</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<h4>Полнотекстовый поиск</h4>
+			
+			<table class="table table-hover category-products-table">
+				<thead>
+					<tr>
+						<th>Наименование</th>
+						<th class="th-description">Коментарий</th>
+						<th class="th-vendor">Производитель</th>
+						<th class="th-code">Артикул</th>
+						<th class="th-quantity">Количество<br/>в наличии</th>
+						<th class="th-price">Цена</th>
+						<th class="th-cart"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="product : ${textResults}">
+						<td>
+							<i class="fa fa-cog"></i> <a href="#" th:text="${product.name}"></a>
+						</td>
+						<td th:text="${product.description}"></td>
+						<td th:text="${product.vendor}"></td>
+						<td th:text="${product.code}"></td>
+						<td class="td-quantity" th:text="${product.quantity}"></td>
+						<td class="td-price" th:text="${product.price}"></td>						
+						<td class="td-cart">
+							<a href="#"> <i class="fa fa-cart-plus"></i> В корзину</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			
+		</div>
+	</body>
+</html>

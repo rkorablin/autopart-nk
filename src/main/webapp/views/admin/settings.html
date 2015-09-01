@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+			
+			<script src="/js/bootstrap-editable.js"></script>
+			<script src="/js/admin/settings.js"></script>
+			
+			<link href="/css/bootstrap-editable.css" rel="stylesheet" type="text/css" />
+			
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="csrf" />
+		
+			<div class="row">
+            	<div class="col-md-12">
+                    <ol class="breadcrumb">
+                    	<li><a href="/admin">Управление</a></li>
+                        <li class="active">Настройки</li>
+                    </ol>
+                    <hr/>
+            	</div>
+            </div>
+		
+			<h2>Настройки</h2>
+			
+			<table class="table table-bordered table-hover admin-settings-table">
+				<thead>
+					<tr>
+						<th>Ключ</th>
+						<th>Значение</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="setting : ${settings}" th:attr="data-setting-id=${setting.id}">
+						<td th:text="${setting.key}"></td>
+						<td class="value">
+							<a href="#" th:id="${setting.key}" th:attr="data-pk=${setting.id}" data-type="text" data-placement="right" th:text="${setting.value}" class="editable editable-click"></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+	</body>
+</html>

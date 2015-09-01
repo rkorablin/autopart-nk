@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+		
+			<h1>Корзина</h1>
+
+			<hr />
+			
+			<table class="table table-hover category-products-table">
+				<thead>
+					<tr>
+						<th>Наименование</th>
+						<th>Коментарий</th>
+						<th>Производитель</th>
+						<th>Артикул</th>
+						<th class="th-quantity">Количество</th>
+						<th class="th-price">Цена</th>
+						<th class="th-cost">Стоимость</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="item : ${cart.items}">
+						<td>
+							<i class="fa fa-cog"></i> <a href="#" th:text="${item.product.name}"></a>
+						</td>
+						<td th:text="${item.product.description}"></td>
+						<td th:text="${item.product.vendor}"></td>
+						<td th:text="${item.product.code}"></td>
+						<td class="td-quantity">
+							<a href="#"><i class="fa fa-plus-circle"></i></a>
+							<input type="text" th:value="${item.quantity}" class="text-center" />
+							<a href="#"><i class="fa fa-minus-circle"></i></a>
+						</td>
+						<td class="td-price" th:text="${item.price}"></td>
+						<td class="td-cost" th:text="${item.cost}"></td>						
+						<td class="td-cart">
+							<a href="#"> <i class="fa fa-remove"></i> Удалить</a>
+						</td>
+					</tr>
+					<tr class="total">
+						<td colspan="6">Итого</td>
+						<td class="td-cost" th:text="${cart.cost}"></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+			<hr/>
+			<h2>Оформление заказа</h2>
+			<div class="alert alert-warning">
+				Офомление заказов на нашем сайте доступно только зарегистрированным пользователям. Авторизуйтесь на сайте при помощи своих e-mail и пароля или пройдите процедуру регистрации, если не делали этого ранее.
+			</div>
+			
+			<div th:replace="loginRegisterBlock :: loginRegisterBlock"></div>
+
+			<hr/>
+			<form>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>Коментарий к заказу</label>
+							<textarea class="form-control" rows="5"></textarea>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>Способ получения</label>
+							<select class="form-control">
+								<option>Самовывоз с Орджоникидзе 11</option>
+								<option>Доставка по указанному адресу</option>
+							</select>
+						</div>
+					</div>					
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Регион</label>
+							<input class="form-control" type="text" placeholder="Регион" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Город</label>
+							<input class="form-control" type="text" placeholder="Город" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Улица</label>
+							<input class="form-control" type="text" placeholder="Улица" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Дом</label>
+							<input class="form-control" type="text" placeholder="Дом" />
+						</div>
+					</div>					
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Квартира / офис</label>
+							<input class="form-control" type="text" placeholder="Квартира / офис" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Индекс</label>
+							<input class="form-control" type="text" placeholder="Индекс" />
+						</div>
+					</div>					
+				</div>
+				<div class="alert alert-info text-center">
+					Стоимость и сроки доставки уточняйте у менеджера
+				</div>
+				<div class="form-group text-center">
+					<button class="btn btn-primary btn-lg">Оформить заказ</button>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>

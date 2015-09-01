@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+		
+			<div class="row">
+            	<div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li><a href="/">Каталог</a></li>
+                        <li th:each="parent, loopStat : ${parents}" th:if="${loopStat.index > 0}">
+                        	<a th:href="${parent.link}" th:text="${parent.name}"></a>
+                        </li>
+                        <li class="active" th:text="${category.name}"></li>
+                    </ol>
+                    <hr/>
+            	</div>
+            </div>
+		
+			<div class="row">
+				<div class="col-md-6">
+					<h2 th:text="${category.name}"></h2>
+				</div>
+				<div class="col-md-6 text-right header-counts">
+					<small>
+						<span th:if="${category.childsCount > 0}" th:text="${@utilsService.getDeclension(category.childsCount, 'раздел', 'раздела', 'разделов')}"></span>
+						<span th:if="${category.productsTotalCount > 0}" th:text="${@utilsService.getDeclension(category.productsTotalCount, 'товар', 'товара', 'товаров')}"></span>
+					</small>
+				</div>
+			</div>
+			
+			<table class="table table-hover category-childs-table" th:if="${category.childsCount > 0}">
+				<thead>
+					<tr>
+						<th class="th-name">Подразделы</th>
+						<th class="th-counts"></th>
+						<th class="th-details"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="child : ${childs}">
+						<td>
+							<i class="fa fa-cogs child-icon"></i> <a th:href="${child.link}" th:text="${child.name}"></a>
+						</td>
+						<td class="td-counts">
+							<span th:if="${child.childsCount > 0}" th:text="${@utilsService.getDeclension(child.childsCount, 'раздел', 'раздела', 'разделов')}"></span>
+							<span th:if="${child.productsTotalCount > 0}" th:text="${@utilsService.getDeclension(child.productsTotalCount, 'товар', 'товара', 'товаров')}"></span>
+						</td>
+						<td class="td-details">
+							<a href="${child.link}"> <i class="fa fa-info-circle"></i> Подробнее</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div th:if="${category.productsCount > 0}">
+				<table th:replace="fragments/productsTable :: productsTable (products = ${products})"></table>
+			</div>
+		</div>
+	</body>
+</html>

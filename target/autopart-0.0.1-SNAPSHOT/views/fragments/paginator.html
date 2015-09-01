@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+<head>
+</head>
+<body>
+	<div th:fragment="paginator (paginator)">
+
+		<div class="text-center" th:if="${paginator.itemsCount > 1}">
+			<nav>
+				<ul class="pagination">
+					<li th:class="${paginator.hasPrevious ? '' : 'disabled'}">
+						<a th:href="${paginator.previousUrl}" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+					<li th:each="item : ${paginator.items}" th:class="${item.current ? 'active' : ''}">
+						<a th:href="${item.url}" th:text="${item.index}"></a>
+					</li>
+					<li th:class="${paginator.hasNext ? '' : 'disabled'}">
+						<a th:href="${paginator.nextUrl}" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	
+	</div>
+</body>
+</html>

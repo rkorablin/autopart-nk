@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+			
+			<script src="/js/jquery.ui.widget.js"></script>
+			
+			<script src="/js/jquery.iframe-transport.js"></script>
+			<script src="/js/jquery.fileupload.js"></script>
+			
+			<script src="/js/jquery.fileupload-ui.js"></script>
+			
+			<script src="/js/admin/categories.js"></script>
+			
+			<link href="/css/jquery.fileupload.css" rel="stylesheet" type="text/css" />
+			
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="csrf" />
+		
+			<div class="row">
+            	<div class="col-md-12">
+                    <ol class="breadcrumb">
+                    	<li><a href="/admin">Управление</a></li>
+                    	
+                        <li th:if="${parent != null}" ><a href="/admin/categories">Категории</a></li>
+                        <li class="active" th:if="${parent == null}" >Категории</li>
+                        
+                        <li th:if="${parents != null}" th:each="parent : ${parents}">
+                        	<li><a th:href="${'/admin/categories?parent_id' + parent.id}" th:text="${parent.name}"></a></li>
+                        </li>
+                        
+                        <li class="active" th:if="${parent != null}" th:text="${parent.name}"></li>
+                    </ol>
+                    <hr/>
+            	</div>
+            </div>
+		
+			<h2>Категории</h2>
+			
+			<table class="table table-bordered table-hover admin-categories-table">
+				<thead>
+					<tr>
+						<th>Наименование</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="category : ${categories}" th:attr="data-category-id=${category.id}">
+						<td>
+							<a th:text="${category.name}" th:href="${'/admin/categories?parent_id=' + category.id}"></a>
+						</td>
+						<td class="upload">
+							<span class="btn btn-success btn-sm fileinput-button">
+								<i class="glyphicon glyphicon-plus"></i>
+								<span>Загрузить изображение</span>
+								<input type="file" name="file" />
+    						</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+		</div>
+	</body>
+</html>

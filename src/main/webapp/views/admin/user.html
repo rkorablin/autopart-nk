@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+		
+			<script src="/js/admin/user.js"></script>	
+		
+			<div class="row">
+            	<div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li><a href="/admin">Управление сайтом</a></li>
+                        <li><a href="/admin/users">Пользователи</a></li>
+                        <li class="active" th:text="${user.fullName}"></li>
+                    </ol>
+                    <hr/>
+            	</div>
+            </div>		
+		
+			<h1>Управление профилем пользователя</h1>
+			<hr />
+			<form id="edit-profile-form">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<input type="hidden" name="id" th:value="${user.id}" />
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>E-mail</label>
+							<input class="form-control" type="text" placeholder="E-mail" name="email" th:value="${user.email}" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Пароль</label>
+							<input class="form-control" type="password" placeholder="Пароль" name="plainPassword" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Подтверждение пароля</label>
+							<input class="form-control" type="password" placeholder="Подтверждение пароля" name="plainPasswordConfirm" />
+						</div>
+					</div>					
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Фамилия</label>
+							<input class="form-control" type="text" placeholder="Фамилия" name="secondName" th:value="${user.secondName}" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Имя</label>
+							<input class="form-control" type="text" placeholder="Имя" name="firstName" th:value="${user.firstName}" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Отчество</label>
+							<input class="form-control" type="text" placeholder="Отчество" name="patronymicName" th:value="${user.patronymicName}" />
+						</div>
+					</div>					
+					
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>Уровень цен</label>
+							<select class="form-control" name="priceTypeId">
+								<option th:each="priceType : ${priceTypes}" th:value="${priceType.id}" th:text="${priceType.name}" th:selected="${priceType.id == user.priceType.id}"></option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="col-md-8 col-md-offset-2">
+						<div class="btn-group profile-type-selector" data-toggle="buttons">
+							<label th:class="${user.type.name() == 'PRIVATE_PERSON' ? 'btn btn-default active' : 'btn btn-default'}">
+								<input type="radio" name="type" value="PRIVATE_PERSON" autocomplete="off" th:checked="${user.type.name() == 'PRIVATE_PERSON'}" />
+								<i class="fa fa-user"></i>
+								<span>
+									Пользователь является
+									<br/>
+									частным лицом
+								</span>
+							</label>
+							<label th:class="${user.type.name() == 'ORGANIZATION_AGENT' ? 'btn btn-default active' : 'btn btn-default'}">
+						    	<input type="radio" name="type" value="ORGANIZATION_AGENT" autocomplete="off" th:checked="${user.type.name() == 'ORGANIZATION_AGENT'}" />
+						    	<i class="fa fa-building-o"></i>
+								<span>
+									Пользователь является
+									<br/>
+									представителем юридического лица
+								</span>
+							</label>
+						</div>						
+					</div>
+
+					<div class="spacer-20"></div>
+
+					<div class="col-md-12" id="organization-name-block" th:style="${user.type.name() == 'ORGANIZATION_AGENT' ? 'display : block;' : 'display : none;'}">
+						<div class="form-group">
+							<label>Полное наименование юридического лица</label>
+							<input class="form-control" type="text" placeholder="Полное наименование юридического лица" name="organizationName" th:value="${user.organizationName}" />
+						</div>
+					</div>					
+					
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Регион</label>
+							<input class="form-control" type="text" placeholder="Регион" name="address.region" th:value="${user.address.region}" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Город</label>
+							<input class="form-control" type="text" placeholder="Город" name="address.city" th:value="${user.address.city}" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Улица</label>
+							<input class="form-control" type="text" placeholder="Улица" name="address.street" th:value="${user.address.street}" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Дом</label>
+							<input class="form-control" type="text" placeholder="Дом" name="address.building" th:value="${user.address.building}" />
+						</div>
+					</div>					
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Квартира / офис</label>
+							<input class="form-control" type="text" placeholder="Квартира / офис" name="address.room" th:value="${user.address.room}" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Индекс</label>
+							<input class="form-control" type="text" placeholder="Индекс" name="address.zipcode" th:value="${user.address.zipcode}" />
+						</div>
+					</div>
+				
+					<hr/>
+					
+					<div th:each="role : ${allRoles}" class="col-md-3">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="role" th:value="${role.id}" th:checked="${userRoles.contains(role)}" /> <span th:text="${role.name}"></span>
+							</label>
+						</div>
+					</div>
+				
+				</div>
+			
+				<div class="form-group text-center">
+					<button class="btn btn-primary btn-lg"><i class="fa fa-check"></i> Сохранить изменения</button>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>

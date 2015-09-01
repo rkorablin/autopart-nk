@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+		
+			<script src="/js/admin/orders.js"></script>
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="csrf" />
+		
+			<div class="row">
+            	<div class="col-md-12">
+                    <ol class="breadcrumb">
+                    	<li><a href="/admin">Управление</a></li>
+                        <li><a href="/admin/orders">Список заказов</a></li>
+                        <li class="active" th:text="${'Заказ №' + order.id}"></li>
+                    </ol>
+                    <hr/>
+            	</div>
+            </div>
+		
+			<h2>Заказ №<span th:text="${order.id}"></span></h2>
+			
+			<dl class="dl-horizontal">
+  				<dt>Дата, время</dt>
+  				<dd th:text="${@utilsService.formatDateTime(order.date)}"></dd>
+  				<dt>Статус</dt>
+  				<dd>
+ 					<select class="form-control" data-action="set-order-status" th:attr="data-order-id=${order.id}">
+						<option th:each="status : ${@utilsService.getOrderStatusEnum().values()}" th:value="${status.name()}" th:text="${status}" th:selected="${status == order.status}"></option>
+					</select>
+  				</dd>
+  				<dt>Заказчик</dt>
+  				<dd th:text="${order.user.fullName + ' ' + order.user.email}"></dd>
+  				<dt>Способ получения</dt>
+  				<dd th:text="${order.receivingMethod}"></dd>
+  				<dt>Адрес</dt>
+  				<dd th:text="${order.address}"></dd>
+			</dl>
+			
+			<table class="table table-bordered table-hover order-table admin-order-table">
+				<thead>
+					<tr>
+						<th rowspan="2">Наименование</th>
+						<th rowspan="2">Артикул</th>
+						<th colspan="3" class="quantity">Количество</th>
+						<th rowspan="2" class="price">Цена</th>
+						<th colspan="3" class="cost">Стоимость</th>
+						<th rowspan="2" class="status">Статус</th>
+					</tr>
+					<tr>
+						<th class="quantity">З</th>
+						<th class="quantity">П</th>
+						<th class="quantity">О</th>
+						
+						<th class="cost">З</th>
+						<th class="cost">П</th>
+						<th class="cost">О</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="item : ${items}" th:attr="data-item-id=${item.id}">
+						<td th:text="${item.product.name}"></td>
+						<td th:text="${item.product.code}"></td>
+						<td th:text="${item.orderedQuantity}" class="quantity"></td>
+						<td class="quantity accepted-quantity">
+							<a href="#"><i class="fa fa-plus-circle" data-action="inc-order-item-accepted-quantity" th:attr="data-item-id=${item.id}"></i></a>
+							<input type="text" th:value="${item.acceptedQuantity}" data-th-attr="data-prev-value=${item.acceptedQuantity}, data-item-id=${item.id}" class="text-center" data-action="set-order-item-accepted-quantity" />
+							<a href="#"><i class="fa fa-minus-circle" data-action="dec-order-item-accepted-quantity" th:attr="data-item-id=${item.id}"></i></a>
+						</td>
+						<td class="quantity rejected-quantity">
+							<a href="#"><i class="fa fa-plus-circle" data-action="inc-order-item-rejected-quantity" th:attr="data-item-id=${item.id}"></i></a>
+							<input type="text" th:value="${item.rejectedQuantity}" data-th-attr="data-prev-value=${item.rejectedQuantity}, data-item-id=${item.id}" class="text-center" data-action="set-order-item-rejected-quantity" />
+							<a href="#"><i class="fa fa-minus-circle" data-action="dec-order-item-rejected-quantity" th:attr="data-item-id=${item.id}"></i></a>
+						</td>
+						<td th:text="${item.price}" class="price"></td>
+						<td th:text="${item.orderedCost}" class="cost ordered-cost"></td>
+						<td th:text="${item.acceptedCost}" class="cost accepted-cost"></td>
+						<td th:text="${item.rejectedCost}" class="cost rejected-cost"></td>
+						<td class="status">
+							<select class="form-control" data-action="set-order-item-status" th:attr="data-item-id=${item.id}">
+								<option th:each="status : ${@utilsService.getOrderItemStatusEnum().values()}" th:value="${status.name()}" th:text="${status}" th:selected="${status == item.status}"></option>
+							</select>
+						</td>
+					</tr>
+					
+					<tr class="total">
+						<td colspan="6">Итого</td>
+						<td th:text="${order.orderedCost}" class="cost"></td>
+						<td th:text="${order.acceptedCost}" class="cost accepted-cost"></td>
+						<td th:text="${order.rejectedCost}" class="cost rejected-cost"></td>
+						<td></td>						
+					</tr>
+				</tbody>
+			</table>
+			
+			<div class="form-group">
+				<label>Коментарий заказчика</label>
+				<textarea class="form-control" rows="5" th:text="${order.comment}" readonly="readonly"></textarea>
+			</div>
+			
+		</div>
+	</body>
+</html>

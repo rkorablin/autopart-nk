@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+		
+			<h1 class="text-center">Авторизация</h1>
+			<hr />
+			<form method="post" action="/security/login">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3">
+						
+						<div class="alert alert-success" th:if="${activated}">
+							Ваш профиль успешно активирован, теперь Вы можете авторизоваться используя свои e-mail и пароль.
+						</div>
+					
+						<div class="form-group">
+							<label>E-mail</label>
+							<input class="form-control" type="text" placeholder="E-mail" name="username" />
+						</div>
+						<div class="form-group">
+							<label>Пароль</label>
+							<input class="form-control" type="password" placeholder="Пароль" name="password" />
+						</div>
+						
+						<div class="alert alert-danger text-center" th:if="${param.error != null}">
+							Ошибка входа, проверьте правильность e-mail'а и пароля, после чего попробуйте еще раз или обратитесь к администратору сайта
+						</div>
+						
+						<div class="form-group text-center">
+							<button class="btn btn-primary btn-lg" type="submit">
+								<i class="fa fa-key"></i> Войти
+							</button>
+						</div>
+						
+					</div>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>

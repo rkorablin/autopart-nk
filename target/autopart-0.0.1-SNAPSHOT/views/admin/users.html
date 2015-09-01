@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" layout:decorator="layout">
+	<body>
+		<div class="container" layout:fragment="content">
+		
+			<div class="row">
+            	<div class="col-md-12">
+                    <ol class="breadcrumb">
+                        <li><a href="/admin">Управление сайтом</a></li>
+                        <li class="active">Пользователи</li>
+                    </ol>
+                    <hr/>
+            	</div>
+            </div>
+		
+			<div class="row">
+				<div class="col-md-8">
+					<h2><i class="fa fa-bars"></i> Пользователи сайта</h2>
+				</div>
+				<div class="col-md-4 text-right header-counts">
+					<small>
+						<span th:text="${'Всего : ' + usersTotalCount + (usersCount != usersTotalCount ? ', найдено : ' + usersCount : '')}"></span>
+					</small>
+				</div>
+			</div>
+		
+			<hr/>
+			
+			<form>
+				<div class="row">
+					<div class="col-md-3">
+						<label>Фильтр по e-mail</label>
+						<input type="text" class="form-control" placeholder="E-mail" name="email" th:value="${email}" />
+					</div>
+					<div class="col-md-3">
+						<label>Фильтр по ФИО</label>
+						<input type="text" class="form-control" placeholder="Фамилия, имя, отчество" name="name" th:value="${name}" />				
+					</div>
+					<div class="col-md-3">
+						<label>Фильтр по ценам</label>
+						<select class="form-control">
+							<option>Все</option>
+							<option>Розница</option>
+							<option>Опт 1</option>
+							<option>Опт 2</option>
+							<option>Опт 3</option>
+						</select>				
+					</div>
+					<div class="col-md-3">
+						<label> &nbsp; </label>
+						<button class="btn btn-primary btn-block"> <i class="fa fa-filter"></i> Отфильтровать</button>
+					</div>				
+				</div>
+			</form>
+		
+			<hr/>
+			<table class="table table-hover users-table">
+				<thead>
+					<tr>
+						<th>E-mail</th>
+						<th>ФИО, наименование</th>
+						<th>Цены</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user : ${users}">
+						<td>
+							<a th:href="${'/admin/user/' + user.id}" th:text="${user.email}"></a>
+						</td>
+						<td>
+							<span th:text="${user.fullName}"></span>
+						</td>
+						<td>
+							<select class="form-control">
+								<option>Розница</option>
+								<option>Опт 1</option>
+								<option>Опт 2</option>
+								<option>Опт 3</option>
+							</select>
+						</td>
+						<td class="profile">
+							<a th:href="${'/admin/user/' + user.id}"> <i class="fa fa-user"></i> Открыть профиль</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<hr/>
+			
+			<div th:replace="fragments/paginator :: paginator (paginator = ${paginator})"></div>
+			
+			<hr/>
+		</div>
+	</body>
+</html>

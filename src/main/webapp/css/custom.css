@@ -1,0 +1,331 @@
+.site-logo {
+	position: relative;
+}
+
+.site-logo #logo-text-1 {
+	color: #4a89dc;
+	position: absolute;
+	top: 17px;
+	left: 128px;
+	font-size: 28px;
+	letter-spacing: 5px;
+	font-weight: bold;
+}
+
+.site-logo #logo-text-2 {
+	color: #4a89dc;
+	position: absolute;
+	top: 42px;
+	left: 80px;
+	font-size: 18px;
+	letter-spacing: 0.4px;
+}
+
+.site-logo #logo-text-3 {
+	color: #4a89dc;
+	position: absolute;
+	top: 62px;
+	left: 80px;
+	font-size: 18px;
+}
+
+.breadcrumb+hr {
+	margin: 5px 0;
+}
+
+.header-counts {
+	font-size: 30px;
+	line-height: 1.5em;
+}
+
+.header-counts small span {
+	font-size: 85%;
+}
+
+.catalog-item {
+	margin-bottom: 20px;
+}
+
+.catalog-item .wrapper {
+	border: 1px solid #eee;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.catalog-item h4 {
+	margin-bottom: 5px;
+}
+
+.catalog-item .media-box .zoom {
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.about-company dl {
+	font-size: 14px;
+}
+
+.category-childs-table .th-name {
+	width: 70%;
+}
+
+.category-childs-table .th-counts {
+	width: 20%;
+}
+
+.category-childs-table .th-details {
+	width: 10%;
+}
+
+.category-childs-table .td-counts {
+	text-align: right;
+}
+
+.category-childs-table .td-details {
+	text-align: right;
+}
+
+.category-childs-table .child-icon {
+	font-size : 1.4em;
+	color : rgb(210, 210, 23);
+}
+
+.table.category-products-table>thead>tr>th {
+	vertical-align: middle;
+}
+
+.category-products-table .th-description {
+	width: 200px;
+}
+
+.category-products-table .th-vendor {
+	width: 150px;
+}
+
+.category-products-table .th-code {
+	width: 120px;
+}
+
+.category-products-table .th-quantity {
+	text-align: center;
+	width: 100px;
+}
+
+.category-products-table .th-price {
+	text-align: right;
+	width: 80px;
+}
+
+.category-products-table .th-cost {
+	text-align: right;
+	width: 100px;
+}
+
+.category-products-table .th-cart {
+	text-align: center;
+	width: 100px;
+}
+
+.category-products-table .td-quantity {
+	text-align: center;
+}
+
+.category-products-table .td-quantity input {
+	text-align: center;
+	width: 50px;
+}
+
+.category-products-table .td-price {
+	text-align: right;
+}
+
+.category-products-table .td-cost {
+	text-align: right;
+}
+
+.category-products-table .td-cart {
+	text-align: right;
+}
+
+.category-products-table .total {
+	font-weight: bold;
+}
+
+.category-products-table .highlight {
+	background-color : #d9edf7;
+}
+
+.h-search-result small {
+	display: inline;
+	font-size: 65%;
+	text-transform: none;
+	letter-spacing: inherit;
+}
+
+.profile-type-selector {
+	width: 100%;
+}
+
+.profile-type-selector label {
+	width: 50%;
+}
+
+.profile-type-selector .fa {
+	font-size: 2.5em;
+}
+
+.profile-type-selector span {
+	display: inline-block;
+	margin-left: 15px;
+}
+
+.orders-table .form-control {
+	margin-bottom: 0;
+}
+
+.orders-table .date-time {
+	
+}
+
+.orders-table .id {
+	width: 100px;
+}
+
+.orders-table .items {
+	width: 120px;
+	text-align: center;
+}
+
+.orders-table .status {
+	width: 120px;
+	text-align: center;
+}
+
+.orders-table .select-status {
+	width: 150px;
+	text-align: center;
+}
+
+.orders-table .details {
+	width: 120px;
+	text-align: right;
+}
+
+.table.order-table>thead>tr>th {
+	vertical-align: middle;
+}
+
+.order-table .quantity {
+	text-align: center;
+	width : 40px;
+}
+
+.order-table.admin-order-table .quantity {
+	width: 80px;
+}
+
+.order-table.admin-order-table .quantity input {
+	width: 30px;
+	margin-bottom: 0;
+}
+
+.order-table .price {
+	text-align: center;
+}
+
+.order-table .cost {
+	text-align: center;
+	width : 80px;
+}
+
+.order-table .quantity i.help,
+.order-table .cost i.help {
+	cursor: help;
+	border-bottom: 1px dotted #777;
+}
+
+.order-table .status {
+	text-align: right;
+}
+
+.order-table .total {
+	font-weight: bold;
+}
+
+.request-table .actions {
+	text-align: center;
+	width: 135px;
+	line-height: 2.5em;
+}
+
+.request-table .form-control {
+	margin-bottom: 0;
+}
+
+.request-table .add {
+	text-align: center;
+}
+
+.users-table .form-control {
+	margin-bottom: 0;
+}
+
+.users-table .profile {
+	text-align: right;
+}
+
+.h-admin-users small {
+	display: inline;
+	font-size: 65%;
+	text-transform: none;
+	letter-spacing: inherit;
+}
+
+dd .form-control {
+	margin-bottom: 0;
+}
+
+.admin-mosaic .btn {
+	font-size: 18px;
+}
+
+.admin-mosaic .btn .fa {
+	font-size: 128px;
+}
+
+.table select.form-control,
+dd select.form-control {
+	height : 25px;
+	padding : 0;
+	margin-bottom : 0;
+}
+
+dd select.form-control {
+	width : auto;	
+}
+
+.btn-input-same-height {
+	line-height : 1.4em;
+}
+
+.queries-table .count {
+	width : 100px;
+}
+
+.admin-categories-table td.upload {
+	width : 120px;
+}
+
+.editable-input .form-control {
+	margin-bottom : 0;
+}
+
+.admin-emails-table .edit {
+	width : 120px;
+}
+
+.form-control.monospace {
+	font-family : 'Ubuntu Mono';
+} 

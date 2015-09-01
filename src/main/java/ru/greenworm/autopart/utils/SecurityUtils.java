@@ -1,0 +1,22 @@
+package ru.greenworm.autopart.utils;
+
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import ru.greenworm.autopart.model.user.User;
+
+public final class SecurityUtils {
+
+	private SecurityUtils() {
+
+	}
+
+	public static User getCurrentUser() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal(); 
+		if (principal instanceof User) {
+			return (User) principal;
+		} else {
+			return null;
+		}
+	}
+
+}
