@@ -206,7 +206,7 @@ public class AdminController {
 		}
 		
 		String fromString = FastDateFormat.getInstance("dd.MM.yyyy").format(from);
-		String toString = FastDateFormat.getInstance("dd.MM.yyyy").format(from);
+		String toString = FastDateFormat.getInstance("dd.MM.yyyy").format(to);
 		
 		model.addAttribute("from", fromString);
 		model.addAttribute("to", toString);
