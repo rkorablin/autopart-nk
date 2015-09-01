@@ -39,6 +39,7 @@ import ru.greenworm.autopart.services.SearchService;
 import ru.greenworm.autopart.services.SettingsService;
 import ru.greenworm.autopart.services.UserDetailsService;
 import ru.greenworm.autopart.utils.JsonUtils;
+import ru.greenworm.autopart.utils.UriUtils;
 
 @Controller
 public class AdminController {
@@ -203,12 +204,15 @@ public class AdminController {
 		if (from == null) {
 			from = DateUtils.truncate(to, Calendar.MONTH);
 		}
-		model.addAttribute("from", FastDateFormat.getInstance("dd.MM.yyyy").format(from));
-		model.addAttribute("to", FastDateFormat.getInstance("dd.MM.yyyy").format(to));
+		
+		String fromString = FastDateFormat.getInstance("dd.MM.yyyy").format(from);
+		String toString = FastDateFormat.getInstance("dd.MM.yyyy").format(from);
+		
+		model.addAttribute("from", fromString);
+		model.addAttribute("to", toString);
 		model.addAttribute("queries", searchService.getQueries(from, to, page, settingsService.getAsInteger(Setting.PER_PAGE)));
 		model.addAttribute("count", searchService.getQueriesDistinctCount(from, to));
-
-		model.addAttribute("paginator", new Paginator(searchService.getQueriesDistinctCount(from, to), settingsService.getAsInteger(Setting.PER_PAGE), "/admin/queries", page));
+		model.addAttribute("paginator", new Paginator(searchService.getQueriesDistinctCount(from, to), settingsService.getAsInteger(Setting.PER_PAGE), UriUtils.getBuilder("/admin/queries").addParameter("from", fromString).addParameter("to", toString).toString(), page));
 
 		return "admin/queries";
 	}
@@ -257,7 +261,7 @@ public class AdminController {
 		emailService.editTemplate(template);
 		return JsonUtils.getSuccessJson();
 	}
-	
+
 	@ExceptionHandler({ AutopartException.class })
 	public @ResponseBody String processException(AutopartException exception) {
 		return JsonUtils.getErrorJson(exception.getMessage());
